@@ -46,7 +46,11 @@ if (utils.isCD()) {
   node {
     stage('Rollout to Stage') {
       unstash stashName
+      echo "stash name :${stashName}"
+      echo "env : ${envStage}"
+
       setupScript?.setupEnvironmentPre(envStage)
+      echo "setupscript : ${setupScript}"
       apply {
         environment = envStage
       }
@@ -63,6 +67,7 @@ if (utils.isCD()) {
     
     stage('Rollout to Run') {
       unstash stashName
+      echo "stash name :${stashName}"
       setupScript?.setupEnvironmentPre(envProd)
       apply {
         environment = envProd
